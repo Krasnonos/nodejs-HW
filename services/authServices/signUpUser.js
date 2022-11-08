@@ -3,7 +3,7 @@ const gravatar = require('gravatar');
 const { User } = require('../../models/auth');
 const { createReject } = require('../../utils');
 
-const signUpUser = async ({ email, password }) => {
+const signUpUser = async ({ email, password, verificationToken }) => {
   const user = await User.findOne({ email });
   if (user) {
     throw createReject(409, 'Email in use');
@@ -15,6 +15,7 @@ const signUpUser = async ({ email, password }) => {
     email,
     password: await bcryptjs.hash(password, 10),
     avatarUrl,
+    verificationToken,
   });
 
   return {
