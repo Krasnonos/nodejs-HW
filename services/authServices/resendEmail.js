@@ -2,12 +2,13 @@ const { User } = require('../../models/auth');
 const { createReject } = require('../../utils');
 const { sendEmail } = require('../../utils');
 
-const resendEmail = async ({ email }) => {
+const resendEmail = async email => {
   const user = await User.findOne({ email });
 
-  if (!user || user.verify) {
+  if (user.verify) {
     throw createReject(400, 'Bad Request');
   }
+
   await sendEmail({
     to: user.email,
     subject: 'Confirm your Email address',
