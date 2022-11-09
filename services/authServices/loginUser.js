@@ -4,7 +4,7 @@ const { User } = require('../../models/auth');
 const { createReject } = require('../../utils');
 
 const loginUser = async ({ email, password }) => {
-  const [user] = await User.find({ email });
+  const [user] = await User.find({ email, verify: true });
 
   if (!user) {
     throw createReject(401, 'Email or password is wrong');

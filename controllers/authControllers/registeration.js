@@ -1,11 +1,11 @@
-const uuid = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const { signUpUser } = require('../../services/authServices');
 const { sendEmail } = require('../../utils');
 
 const registeration = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const verificationToken = 1234;
+  const verificationToken = uuidv4();
 
   try {
     const result = await signUpUser({
@@ -18,7 +18,7 @@ const registeration = async (req, res, next) => {
       to: email,
       subject: 'Confirm your Email address',
       text: 'Hello, thank you for registration!',
-      html: `<h1>Hello, thank you for registration!</h1> <a href ="localhost:3000/api/users/verify/:${verificationToken}">Click here to confimed your Email</a>`,
+      html: `<h1>Hello, thank you for registration!</h1> <a href ="http://localhost:3000/api/users/verify/${verificationToken}">Click here to confimed your Email</a>`,
     });
 
     res.status(201).json({ status: 'Succsess', user: result });

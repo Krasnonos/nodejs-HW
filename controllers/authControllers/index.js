@@ -3,6 +3,7 @@ const login = require('./login');
 const getCurrent = require('./getCurrent');
 const logout = require('./logout');
 const patchAvatar = require('./patchAvatar');
+const verifyEmail = require('./verifyEmail');
 
 module.exports = {
   login,
@@ -10,4 +11,5 @@ module.exports = {
   getCurrent,
   logout,
   patchAvatar,
+  verifyEmail,
 };
