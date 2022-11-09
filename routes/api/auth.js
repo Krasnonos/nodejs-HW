@@ -13,6 +13,10 @@ router.post('/current', authorizationMiddleware, ctrl.getCurrent);
 
 router.post('/logout', authorizationMiddleware, ctrl.logout);
 
+router.get('/verify/:verificationToken', ctrl.verifyEmail);
+
+router.post('/verify', ctrl.resendVerificationEmail);
+
 router.patch(
   '/avatars',
   authorizationMiddleware,
